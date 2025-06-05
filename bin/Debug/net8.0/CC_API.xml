@@ -1,0 +1,196 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CC_API</name>
+    </assembly>
+    <members>
+        <member name="M:CC_API.Controllers.CopyController.CopyController.CostPerPage(CC_API.Domain.DTOs.Copy.CopyDTO)">
+            <summary>
+            Records the cost values per page linked to the year of validity.
+            </summary>
+            <param name="copy">DTO containing the date and year information only for data visualization.</param>
+            <returns>status of the operation with the specific HTTP verb code.</returns>
+        </member>
+        <member name="M:CC_API.Controllers.CopyController.CopyController.ShowValues">
+            <summary>
+            Returns all registered copy costs.
+            </summary>
+        </member>
+        <member name="M:CC_API.Controllers.CopyController.CopyController.UpdateCosts(System.Guid,CC_API.Domain.DTOs.Copy.CopyDTO)">
+            <summary>
+            Updates the cost per page for a specific copy record.
+            </summary>
+            <param name="id">The unique identifier of the copy record to update.</param>
+            <param name="copy">DTO containing the new year and cost per page values.</param>
+            <returns>
+            Returns the updated <see cref="T:CC_API.Domain.Entities.Copy.Copy"/> entity if successful.<br/>
+            Returns 400 if the input is invalid.<br/>
+            Returns 404 if the record is not found.<br/>
+            </returns>
+        </member>
+        <member name="M:CC_API.Controllers.CopyController.CopyController.DeleteCost(System.Guid)">
+            <summary>
+            Deletes a specific copy cost record by its unique identifier.
+            </summary>
+            <param name="id">The unique identifier of the copy record to delete.</param>
+            <returns>
+            Returns 204 No Content if the deletion is successful.
+            Returns 404 if the record is not found.
+            </returns>
+        </member>
+        <member name="M:CC_API.Controllers.HomeController.HomeController.Index">
+            <summary>
+            Returns basic information about the API or its status.
+            </summary>
+            <remarks>
+            This endpoint can be used to verify that the API is running and accessible.
+            </remarks>
+            <returns>
+            Returns a <see cref="T:CC_API.Domain.ModelViews.Home.Home"/> object with basic API information.
+            </returns>
+        </member>
+        <member name="T:CC_API.Domain.Interfaces.ICopy.ICopy">
+            <summary>
+            Defines the contract for copy cost management services.
+            </summary>
+        </member>
+        <member name="M:CC_API.Domain.Interfaces.ICopy.ICopy.Register_CPP(CC_API.Domain.DTOs.Copy.CopyDTO)">
+            <summary>
+            Registers a new copy cost for a given year.
+            </summary>
+            <param name="copy">DTO containing the year and cost per page information.</param>
+            <returns>The created <see cref="T:CC_API.Domain.Entities.Copy.Copy"/> entity with its generated identifier.</returns>
+            <exception cref="T:CC_API.Domain.Services.SCopy.BusinessException">
+            Thrown when the input data is invalid or a cost for the specified year already exists.
+            </exception>
+        </member>
+        <member name="M:CC_API.Domain.Interfaces.ICopy.ICopy.Show_CPP">
+            <summary>
+            Retrieves all registered copy costs.
+            </summary>
+            <returns>A list of <see cref="T:CC_API.Domain.Entities.Copy.Copy"/> entities.</returns>
+            <exception cref="T:CC_API.Domain.Services.SCopy.BusinessException">
+            Thrown when no copy costs are found.
+            </exception>
+        </member>
+        <member name="M:CC_API.Domain.Interfaces.ICopy.ICopy.Update_CPP(System.Guid,CC_API.Domain.DTOs.Copy.CopyDTO)">
+            <summary>
+            Updates the cost per page for a specific copy record.
+            </summary>
+            <param name="id">The unique identifier of the copy record to update.</param>
+            <param name="copy">DTO containing the new year and cost per page values.</param>
+            <returns>The updated <see cref="T:CC_API.Domain.Entities.Copy.Copy"/> entity.</returns>
+            <exception cref="T:CC_API.Domain.Services.SCopy.BusinessException">
+            Thrown when the input data is invalid, the record is not found, or a conflict occurs.
+            </exception>
+        </member>
+        <member name="M:CC_API.Domain.Interfaces.ICopy.ICopy.Delete_CPP(System.Guid)">
+            <summary>
+            Deletes a specific copy cost record by its unique identifier.
+            </summary>
+            <param name="id">The unique identifier of the copy record to delete.</param>
+            <returns>A task representing the asynchronous operation.</returns>
+            <exception cref="T:CC_API.Domain.Services.SCopy.BusinessException">
+            Thrown when the record is not found.
+            </exception>
+        </member>
+        <member name="T:CC_API.Domain.Services.SCopy.BusinessException">
+            <summary>
+            Exception thrown when a business rule is violated in copy cost operations.
+            </summary>
+        </member>
+        <member name="M:CC_API.Domain.Services.SCopy.BusinessException.#ctor(System.String)">
+            <summary>
+            Exception thrown when a business rule is violated in copy cost operations.
+            </summary>
+        </member>
+        <member name="T:CC_API.Domain.Services.SCopy.SCopy">
+            <summary>
+            Service implementation for managing copy cost records.
+            </summary>
+        </member>
+        <member name="M:CC_API.Domain.Services.SCopy.SCopy.#ctor(CC_API.Infrastructure.Database.DatabaseContext)">
+            <summary>
+            Service implementation for managing copy cost records.
+            </summary>
+        </member>
+        <member name="M:CC_API.Domain.Services.SCopy.SCopy.Register_CPP(CC_API.Domain.DTOs.Copy.CopyDTO)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CC_API.Domain.Services.SCopy.SCopy.Show_CPP">
+            <inheritdoc/>
+        </member>
+        <member name="M:CC_API.Domain.Services.SCopy.SCopy.Update_CPP(System.Guid,CC_API.Domain.DTOs.Copy.CopyDTO)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CC_API.Domain.Services.SCopy.SCopy.Delete_CPP(System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CC_API.Helper.Conventions.SlugifyParameterTransformer.MyRegex">
+            <remarks>
+            Pattern:<br/>
+            <code>([a-z])([A-Z])</code><br/>
+            Explanation:<br/>
+            <code>
+            ○ 1st capture group.<br/>
+                ○ Match a character in the set [a-z].<br/>
+            ○ 2nd capture group.<br/>
+                ○ Match a character in the set [A-Z].<br/>
+            </code>
+            </remarks>
+        </member>
+        <member name="T:CC_API.Migrations.CC_Migration01">
+            <inheritdoc />
+        </member>
+        <member name="M:CC_API.Migrations.CC_Migration01.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CC_API.Migrations.CC_Migration01.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CC_API.Migrations.CC_Migration01.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.MyRegex_0">
+            <summary>Custom <see cref="T:System.Text.RegularExpressions.Regex"/>-derived type for the MyRegex method.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.MyRegex_0.Instance">
+            <summary>Cached, thread-safe singleton instance.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.MyRegex_0.#ctor">
+            <summary>Initializes the instance.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.MyRegex_0.RunnerFactory">
+            <summary>Provides a factory for creating <see cref="T:System.Text.RegularExpressions.RegexRunner"/> instances to be used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.MyRegex_0.RunnerFactory.CreateInstance">
+            <summary>Creates an instance of a <see cref="T:System.Text.RegularExpressions.RegexRunner"/> used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.MyRegex_0.RunnerFactory.Runner">
+            <summary>Provides the runner that contains the custom logic implementing the specified regular expression.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.MyRegex_0.RunnerFactory.Runner.Scan(System.ReadOnlySpan{System.Char})">
+            <summary>Scan the <paramref name="inputSpan"/> starting from base.runtextstart for the next match.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.MyRegex_0.RunnerFactory.Runner.TryFindNextPossibleStartingPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Search <paramref name="inputSpan"/> starting from base.runtextpos for the next location a match could possibly start.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if a possible match was found; false if no more matches are possible.</returns>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.MyRegex_0.RunnerFactory.Runner.TryMatchAtCurrentPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Determine whether <paramref name="inputSpan"/> at base.runtextpos is a match for the regular expression.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if the regular expression matches at the current position; otherwise, false.</returns>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.Utilities">
+            <summary>Helper methods used by generated <see cref="T:System.Text.RegularExpressions.Regex"/>-derived implementations.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_defaultTimeout">
+            <summary>Default timeout value set in <see cref="T:System.AppContext"/>, or <see cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout"/> if none was set.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_hasTimeout">
+            <summary>Whether <see cref="F:System.Text.RegularExpressions.Generated.Utilities.s_defaultTimeout"/> is non-infinite.</summary>
+        </member>
+    </members>
+</doc>
